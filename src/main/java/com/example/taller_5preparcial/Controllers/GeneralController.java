@@ -34,7 +34,7 @@ public class GeneralController{
         panelContenido.getChildren().clear();
         panelContenido.getChildren().add(panelConsultarClientes);
     }
-
+//hola
     @FXML
     void onProductos() throws IOException {
         AnchorPane panelConsultarProductos = FXMLLoader.load(

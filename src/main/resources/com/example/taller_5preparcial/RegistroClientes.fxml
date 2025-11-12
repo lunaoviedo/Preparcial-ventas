@@ -56,17 +56,17 @@
                         </GridPane>
                         <VBox prefHeight="132.0" prefWidth="214.0">
                             <children>
-                                <Button fx:id="btnAgregar" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" onAction="#onAgregar" text="Agregar">
+                                <Button fx:id="btnAgregar" mnemonicParsing="false" onAction="#onAgregar" prefHeight="26.0" prefWidth="70.0" text="Agregar">
                                     <VBox.margin>
                                         <Insets bottom="20.0" />
                                     </VBox.margin>
                                 </Button>
-                                <Button fx:id="btnEliminar" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" onAction="#onEliminar" text="Eliminar">
+                                <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="#onEliminar" prefHeight="26.0" prefWidth="70.0" text="Eliminar">
                                     <VBox.margin>
                                         <Insets bottom="20.0" />
                                     </VBox.margin>
                                 </Button>
-                                <Button fx:id="btnModificar" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" onAction="#onModificar" text="Actualizar" />
+                                <Button fx:id="btnModificar" mnemonicParsing="false" onAction="#onModificar" prefHeight="26.0" prefWidth="70.0" text="Actualizar" />
                             </children>
                             <HBox.margin>
                                 <Insets />
@@ -86,7 +86,7 @@
                             <columns>
                                 <TableColumn fx:id="colId" prefWidth="116.00006103515625" text="Cédula" />
                                 <TableColumn fx:id="colNombre" prefWidth="131.99993896484375" text="Nombre" />
-                                <TableColumn prefWidth="127.20001220703125" text="Teléfono" />
+                                <TableColumn fx:id="colTel" prefWidth="127.20001220703125" text="Teléfono" />
                                 <TableColumn fx:id="colCorreo" prefWidth="187.199951171875" text="Correo" />
                             </columns>
                         </TableView>

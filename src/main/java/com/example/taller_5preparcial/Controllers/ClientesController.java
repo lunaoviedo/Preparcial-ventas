@@ -59,12 +59,13 @@ public class ClientesController {
         tablaClientes.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> {
                     boolean isSelected = newValue != null;
-                    btnEliminar.setDisable(isSelected);
+                    btnEliminar.setDisable(!isSelected);
                     btnModificar.setDisable(!isSelected);
                     mostrarCliente(newValue);
                     txtId.setDisable(isSelected);
                 }
         );
+
     }
     private void configurarTabla() {
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -73,10 +74,10 @@ public class ClientesController {
         colCorreo.setCellValueFactory(new PropertyValueFactory<>("email"));
     }
     private void cargarClientes() {
-        clientesObservable = FXCollections.observableArrayList(
-                clienteRepository.getClientes());
+        clientesObservable = clienteRepository.getClientes(); // misma lista viva
         tablaClientes.setItems(clientesObservable);
     }
+
     private void limpiarCampos() {
         txtId.clear();
         txtNombre.clear();
@@ -86,26 +87,28 @@ public class ClientesController {
         tablaClientes.getSelectionModel().clearSelection();
     }
 
-
     @FXML
     void onAgregar() {
-        if(!validarCampos()){
+        if (!validarCampos()) {
             return;
-        } try{
+        }
+
+        try {
             String id = txtId.getText();
             String name = txtNombre.getText();
             String phone = txtTel.getText();
             String email = txtCorreo.getText();
-            Cliente cliente= new Cliente(id, name, phone, email);
+            Cliente cliente = new Cliente(id, name, phone, email);
             clienteRepository.addCliente(cliente);
+            tablaClientes.refresh();
             mostrarAlerta("Éxito", "Cliente agregado correctamente.", Alert.AlertType.INFORMATION);
-            actualizarTabla();
             limpiarCampos();
-        }catch (Exception e) {
+        } catch (Exception e) {
             mostrarAlerta("Error", "Error al agregar el cliente: " + e.getMessage(), Alert.AlertType.ERROR);
         }
-
     }
+
+
     private boolean validarCampos() {
         if(txtId.getText().isEmpty() || txtNombre.getText().isEmpty() || txtTel.getText().isEmpty()||
                 txtCorreo.getText().isEmpty()) {
@@ -130,7 +133,8 @@ public class ClientesController {
         if(resultado.isPresent() && resultado.get() == ButtonType.OK){
             try{
                 clienteRepository.removeCliente(cliente);
-                cargarClientes();
+                clientesObservable.remove(cliente);
+                tablaClientes.refresh();
                 mostrarAlerta("Exito", "cliente eliminado correctamente.", Alert.AlertType.INFORMATION);
                 limpiarCampos();
             } catch (Exception e) {

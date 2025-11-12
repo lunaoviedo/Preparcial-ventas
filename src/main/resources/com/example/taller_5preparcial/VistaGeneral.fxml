@@ -33,17 +33,17 @@
                                     <children>
                                         <AnchorPane prefHeight="264.0" prefWidth="326.0">
                                             <children>
-                                                <Button fx:id="btnClientes" alignment="CENTER" layoutX="20.0" layoutY="28.0" mnemonicParsing="false" onAction="#CargarClientes" prefHeight="48.0" prefWidth="137.0" style="-fx-border-radius: 70; -fx-background-color: #416282; -fx-border-color: black; -fx-background-radius: 70;" text="Clientes" textFill="#fafafa">
+                                                <Button fx:id="btnClientes" alignment="CENTER" layoutX="20.0" layoutY="28.0" mnemonicParsing="false" onAction="#onClientes" prefHeight="48.0" prefWidth="137.0" style="-fx-border-radius: 70; -fx-background-color: #416282; -fx-border-color: black; -fx-background-radius: 70;" text="Clientes" textFill="#fafafa">
                                                     <font>
                                                         <Font size="13.5" />
                                                     </font>
                                                 </Button>
-                                                <Button fx:id="btnProductos" alignment="CENTER" layoutX="20.0" layoutY="91.0" mnemonicParsing="false" onAction="#cargarProductos" prefHeight="48.0" prefWidth="137.0" style="-fx-border-radius: 70; -fx-background-color: #416282; -fx-border-color: black; -fx-background-radius: 70;" text="Productos" textFill="#fafafa">
+                                                <Button fx:id="btnProductos" alignment="CENTER" layoutX="20.0" layoutY="91.0" mnemonicParsing="false" onAction="#onProductos" prefHeight="48.0" prefWidth="137.0" style="-fx-border-radius: 70; -fx-background-color: #416282; -fx-border-color: black; -fx-background-radius: 70;" text="Productos" textFill="#fafafa">
                                                     <font>
                                                         <Font size="13.5" />
                                                     </font>
                                                 </Button>
-                                                <Button fx:id="btnVentas" alignment="CENTER" layoutX="20.0" layoutY="150.0" mnemonicParsing="false" onAction="#cargarVentas" prefHeight="48.0" prefWidth="137.0" style="-fx-border-radius: 70; -fx-background-color: #416282; -fx-border-color: black; -fx-background-radius: 70;" text="Ventas" textFill="#fafafa">
+                                                <Button fx:id="btnVentas" alignment="CENTER" layoutX="20.0" layoutY="150.0" mnemonicParsing="false" onAction="#onVentas" prefHeight="48.0" prefWidth="137.0" style="-fx-border-radius: 70; -fx-background-color: #416282; -fx-border-color: black; -fx-background-radius: 70;" text="Ventas" textFill="#fafafa">
                                                     <font>
                                                         <Font size="13.5" />
                                                     </font>
@@ -56,7 +56,7 @@
                         </VBox>
                     </left>
                     <center>
-                        <AnchorPane fx:id="layout" prefHeight="404.0" prefWidth="450.0" BorderPane.alignment="CENTER">
+                        <AnchorPane fx:id="panelContenido" prefHeight="404.0" prefWidth="450.0" BorderPane.alignment="CENTER">
                             <children>
                                 <HBox layoutX="134.0" layoutY="20.0" />
                                 <Label layoutX="126.0" layoutY="20.0" text="Seleccione una opción">

@@ -11,11 +11,7 @@ import javafx.util.StringConverter;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-
-import java.awt.*;
-import java.awt.Button;
-import java.awt.Label;
-import java.awt.event.ActionEvent;
+import javafx.event.ActionEvent;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -23,38 +19,29 @@ import java.time.format.DateTimeFormatter;
 public class VentasController {
     @FXML
     private Button btnVender;
-
     @FXML
     private ComboBox<Cliente> cmbCliente;
-
     @FXML
     private ComboBox<Producto> cmbProducto;
-
     @FXML
     private TableColumn<DetalleVenta, Integer> colCantidad;
-
     @FXML
-    private TableColumn<DetalleVenta, ?> colCliente;
-
+    private TableColumn<DetalleVenta, String> colCliente;
     @FXML
-    private TableColumn<DetalleVenta, ?> colFecha;
-
+    private TableColumn<DetalleVenta, String> colProducto;
     @FXML
-    private TableColumn<DetalleVenta, ?> colProducto;
-
+    private TableColumn<DetalleVenta, LocalDate> colFecha;
     @FXML
     private TableColumn<DetalleVenta, Double> colSubtotal;
     @FXML
     private Spinner<Integer> spinnerCantidad;
-
     @FXML
     private Label lblHora;
-
     @FXML
     private Label lblPrecio;
-
     @FXML
-    private Label lblPrecioFinal;
+    private Label lblSubtotal;
+
     @FXML
     private TableView<DetalleVenta> tablaVentas;
     private ObservableList<DetalleVenta> listaVentas;
@@ -80,7 +67,6 @@ public class VentasController {
         SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 1, 1);
         spinnerCantidad.setValueFactory(valueFactory);
         lblPrecio.setText("$ 0.00");
-        lblPrecioFinal.setText("$ 0.00");
     }
     private void configListeners() {
         cmbProducto.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -93,7 +79,6 @@ public class VentasController {
 
             } else{
                 lblPrecio.setText("$ 0.00");
-                lblPrecioFinal.setText("$ 0.00");
                 precioUnitario = 0.0;
                 actualizarSpinner(1);
             }
@@ -118,11 +103,12 @@ public class VentasController {
         if (precioUnitario > 0 && spinnerCantidad.getValue() != null) {
             int cantidad = spinnerCantidad.getValue();
             double subtotal = precioUnitario * cantidad;
-            lblPrecioFinal.setText("$ " + String.format("%.2f", subtotal));
+            lblSubtotal.setText("$ " + String.format("%.2f", subtotal)); // ✅ actualiza el label
         } else {
-            lblPrecioFinal.setText("$ 0.00");
+            lblSubtotal.setText("$ 0.00"); // por si no hay producto
         }
     }
+
     private void cargarClientes() {
         cmbCliente.setItems(FXCollections.observableArrayList(clienteRepository.getClientes()));
 
@@ -191,14 +177,14 @@ public class VentasController {
     private void limpiarCampos() {
         cmbProducto.getSelectionModel().clearSelection();
         lblPrecio.setText("$ 0.00");
-        lblPrecioFinal.setText("$ 0.00");
-
+        lblSubtotal.setText("$ 0.00"); // ✅ reinicia el subtotal
 
         SpinnerValueFactory.IntegerSpinnerValueFactory factory =
                 (SpinnerValueFactory.IntegerSpinnerValueFactory) spinnerCantidad.getValueFactory();
         factory.setMax(1);
         factory.setValue(1);
     }
+
     private void mostrarAlerta(String titulo, String mensaje, Alert.AlertType tipo) {
         Alert alert = new Alert(tipo);
         alert.setTitle(titulo);

@@ -11,7 +11,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TextField;
-import java.awt.*;
+import javafx.scene.control.Button;
+
 import java.util.Optional;
 
 public class ProductosController {
@@ -55,19 +56,23 @@ public class ProductosController {
         productoRepository =ProductoRepository.getInstancia();
         configurarTabla();
         cargarProductos();
+        tablaProductos.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> mostrarProducto(newValue)
+        );
+
     }
     private void configurarTabla(){
-        colCodigo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
-        colNombre.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colCodigo.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         colPrecio.setCellValueFactory(new PropertyValueFactory<>("precio"));
         colStock.setCellValueFactory(new PropertyValueFactory<>("stock"));
     }
-    private void cargarProductos(){
-        productosObservable = FXCollections.observableArrayList(
-                productoRepository.getProductos());
 
+    private void cargarProductos() {
+        productosObservable = FXCollections.observableArrayList(productoRepository.getProductos());
         tablaProductos.setItems(productosObservable);
     }
+
     private void limpiarCampos(){
         txtCodigo.clear();
         txtNombre.clear();
@@ -76,6 +81,7 @@ public class ProductosController {
         txtCodigo.setDisable(false);
         txtNombre.setDisable(false);
         tablaProductos.getSelectionModel().clearSelection();
+
     }
 
     @FXML
@@ -139,7 +145,7 @@ public class ProductosController {
     public void actualizarTabla(){cargarProductos();}
     private void mostrarProducto(Producto producto){
         if(producto !=null){
-            txtCodigo.setText(producto.getCodigo());
+            txtCodigo.setText(producto.getId());
             txtNombre.setText(producto.getNombre());
             txtPrecio.setText(String.valueOf(producto.getPrecio()));
             txtStock.setText(String.valueOf(producto.getStock()));
@@ -147,6 +153,7 @@ public class ProductosController {
             limpiarCampos();
         }
     }
+
 
     @FXML
     void onModificar() {
@@ -158,6 +165,8 @@ public class ProductosController {
             mostrarAlerta("Error", "Seleccione un producto para modificar.", Alert.AlertType.WARNING);
             return;
         }try{
+            producto.setId(txtCodigo.getText());
+            producto.setNombre(txtNombre.getText());
             producto.setPrecio(Double.parseDouble(txtPrecio.getText()));
             producto.setStock(Integer.parseInt(txtStock.getText()));
             actualizarTabla();

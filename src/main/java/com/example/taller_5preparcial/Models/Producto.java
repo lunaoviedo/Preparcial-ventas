@@ -1,26 +1,26 @@
 package com.example.taller_5preparcial.Models;
 
 public class Producto {
-    private String id;
+    private String codigo;
     private String nombre;
     private Double precio;
     private Integer stock;
 
     public Producto() {}
 
-    public Producto (String id, String nombre, Double precio, Integer stock) {
-        this.id = id;
+    public Producto (String codigo, String nombre, Double precio, Integer stock) {
+        this.codigo = codigo;
         this.nombre = nombre;
         this.precio = precio;
         this.stock = stock;
     }
 
     public String getId() {
-        return id;
+        return codigo;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setId(String codigo) {
+        this.codigo = codigo;
     }
 
     public String getNombre() {

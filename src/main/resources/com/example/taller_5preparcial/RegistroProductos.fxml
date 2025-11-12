@@ -56,17 +56,17 @@
                         </GridPane>
                         <VBox prefHeight="132.0" prefWidth="214.0">
                             <children>
-                                <Button fx:id="btnAgregar" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" onAction="#onAgregar"text="Agregar">
+                                <Button fx:id="btnAgregar" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" onAction="#onAgregar" text="Agregar">
                                     <VBox.margin>
                                         <Insets bottom="20.0" />
                                     </VBox.margin>
                                 </Button>
-                                <Button fx:id="btnEliminar" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" onAction="#onEliminar"text="Eliminar">
+                                <Button fx:id="btnEliminar" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" onAction="#onEliminar" text="Eliminar">
                                     <VBox.margin>
                                         <Insets bottom="20.0" />
                                     </VBox.margin>
                                 </Button>
-                                <Button fx:id="btnModificar" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0"onAction="#onModificar" text="Actualizar" />
+                                <Button fx:id="btnModificar" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" onAction="#onModificar" text="Actualizar" />
                             </children>
                             <HBox.margin>
                                 <Insets />

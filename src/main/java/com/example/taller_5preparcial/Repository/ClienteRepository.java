@@ -22,7 +22,7 @@ public class ClienteRepository {
     }
 
     private void cargarDatosEjemplo() {
-        clientes.add(new Cliente("1056829202", "Daniela Vega", "3104250997", "DanieVega@gmail.com"));
+        clientes.add(new Cliente("1056829202", "David Santos", "3104250997", "Davilss@gmail.com"));
         clientes.add(new Cliente("109097508", "Simon Veraniega", "3207411485", "Simonettapatineta@gmail.com"));
     }
 
